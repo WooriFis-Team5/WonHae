@@ -1,6 +1,7 @@
 package account.controller;
 
 import account.controller.command.AccountCommand;
+import account.domain.dao.dto.AccountDto;
 import account.domain.service.AccountService;
 import account.view.AccountInputView;
 import account.view.AccountOutputView;
@@ -47,17 +48,27 @@ public class AccountController implements Controller {
     public void issue() {
         try {
             accountService.issue(execute(inputView::readNameAndSSN));
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             globalOutputView.printException(e.getMessage());
         }
     }
 
     public void deposit() {
-
+        try {
+            AccountDto response = accountService.deposit(execute(inputView::readBankingInfo));
+            outputView.successDeposit(response);
+        } catch (IllegalArgumentException e) {
+            globalOutputView.printException(e.getMessage());
+        }
     }
 
     public void withdraw() {
-
+        try {
+            AccountDto response = accountService.withDraw(execute(inputView::readBankingInfo));
+            outputView.successWithdraw(response);
+        } catch (IllegalArgumentException e) {
+            globalOutputView.printException(e.getMessage());
+        }
     }
 
     public void isActivated() {

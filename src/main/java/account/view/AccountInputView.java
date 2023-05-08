@@ -1,6 +1,7 @@
 package account.view;
 
 import account.controller.command.AccountCommand;
+import account.domain.dao.dto.request.BankingRequestDto;
 import account.domain.dao.dto.request.IssueRequestDto;
 import account.util.AccountPrint;
 
@@ -24,10 +25,24 @@ public class AccountInputView {
         AccountPrint.inputSSN();
         String ssn = sc.nextLine();
 
-        AccountPrint.getAccountPW();
+        AccountPrint.readAccountPW();
         String pw = sc.nextLine();
 
         validator.issue(ssn, pw);
         return new IssueRequestDto(name, ssn, pw);
+    }
+
+    public BankingRequestDto readBankingInfo() {
+        AccountPrint.withdraw();
+        String accountId = sc.nextLine();
+
+        AccountPrint.getAccountPW();
+        String pw = sc.nextLine();
+        validator.pwValidate(pw);
+
+        AccountPrint.howMuch();
+        String amount = sc.nextLine();
+
+        return new BankingRequestDto(Integer.parseInt(accountId), pw, Integer.parseInt(amount));
     }
 }

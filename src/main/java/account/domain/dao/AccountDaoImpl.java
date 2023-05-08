@@ -1,7 +1,9 @@
 package account.domain.dao;
 
 
+import account.domain.dao.dto.AccountDto;
 import account.domain.dao.dto.request.IssueRequestDto;
+import account.domain.dao.dto.request.BankingRequestDto;
 import global.util.DBUtil;
 
 import java.sql.*;
@@ -47,6 +49,76 @@ public class AccountDaoImpl implements AccountDao {
             throw new IllegalArgumentException("계좌를 찾는 도중 에러가 발생했습니다.");
         } finally {
             DBUtil.close(con, ps, rs);
+        }
+    }
+
+    @Override
+    public AccountDto findByAccountId(Integer accountId) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        AccountDto response = null;
+        try {
+            con = DBUtil.getConnection();
+
+            ps = con.prepareStatement("SELECT account_id, owner_name, account_pw, balance FROM account WHERE account_id = ?");
+            ps.setInt(1, accountId);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                response = AccountDto.builder()
+                        .accountId(rs.getInt(1))
+                        .name(rs.getString(2))
+                        .encryptPW(rs.getString(3))
+                        .balance(rs.getInt(4))
+                        .build();
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("계좌아이디를 통해 계좌 정보를 찾는 도중 에러가 발생했습니다.");
+        }
+        return response;
+    }
+
+    @Override
+    public void deposit(BankingRequestDto request) {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = DBUtil.getConnection();
+            ps = con.prepareStatement("UPDATE account SET balance = balance + ?, updated_at = ? WHERE account_id = ?");
+
+            ps.setInt(1, request.getAmount());
+            ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setInt(3, request.getAccountId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("계좌 입금 과정 중 에러가 발생했습니다.");
+        } finally {
+            DBUtil.close(con, ps);
+        }
+    }
+
+    @Override
+    public void withdraw(BankingRequestDto request) {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = DBUtil.getConnection();
+            ps = con.prepareStatement("UPDATE account SET balance = balance - ?, updated_at = ? WHERE account_id = ?");
+
+            ps.setInt(1, request.getAmount());
+            ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setInt(3, request.getAccountId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("계좌 출금 과정 중 에러가 발생했습니다.");
+        } finally {
+            DBUtil.close(con, ps);
         }
     }
 }

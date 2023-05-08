@@ -21,11 +21,29 @@ public class AccountPrint {
         System.out.print(PURPLE + "이름을 입력해 주세요 : ");
     }
 
+    public static void deposit() {
+        System.out.println(GREEN + "\n계좌 입금 업무입니다.");
+        System.out.print(PURPLE + "입급하실 계좌 번호를 입력해 주세요 : ");
+    }
+
+    public static void howMuch() {
+        System.out.print("입/출금 금액을 입력해 주세요 : ");
+    }
+
+    public static void getAccountPW(){
+        System.out.print(PURPLE + "계좌 비밀번호 4자리를 입력해 주세요 : ");
+    }
+
+    public static void withdraw() {
+        System.out.println(GREEN + "\n계좌 출금 업무입니다.");
+        System.out.print(PURPLE + "출금하실 계좌 번호를 입력해 주세요 : ");
+    }
+
     public static void inputSSN() {
         System.out.print(PURPLE + "주민번호를 입력해 주세요 (\"-\"로 구분해주세요) : ");
     }
 
-    public static void getAccountPW() {
+    public static void readAccountPW() {
         System.out.print(PURPLE + "계좌에 설정하실 비밀번호 4자리를 입력해 주세요 : ");
     }
 }
