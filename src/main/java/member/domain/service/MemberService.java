@@ -3,9 +3,9 @@ package member.domain.service;
 import member.domain.dao.MemberDao;
 import member.domain.dao.MemberDaoImpl;
 import member.domain.dao.dto.MemberDto;
+import member.domain.dao.dto.request.LoginRequestDto;
+import member.domain.dao.dto.response.LoginResponseDto;
 import member.util.Crypt;
-
-import java.sql.SQLException;
 
 public class MemberService {
     private final MemberDao memberDao = new MemberDaoImpl();
@@ -16,4 +16,12 @@ public class MemberService {
 
         memberDao.save(dto);
     }
+
+    public boolean login(LoginRequestDto request) {
+        LoginResponseDto response = memberDao.findById(request.getId());
+
+        return Crypt.decrypt(request.getPw(), response.getEncryptPW());
+    }
+
+
 }

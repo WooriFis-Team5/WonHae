@@ -2,6 +2,7 @@ package member.view;
 
 import member.controller.command.MemberCommand;
 import member.domain.dao.dto.MemberDto;
+import member.domain.dao.dto.request.LoginRequestDto;
 import member.util.MemberPrint;
 
 import java.util.Scanner;
@@ -22,11 +23,21 @@ public class MemberInputView {
         String[] info = sc.nextLine().split(", ");
 
 
-        return MemberDto.builder()
+        return MemberDto.MemberDtoBuilder()
                 .id(info[0])
                 .pw(info[1])
                 .name(info[2])
                 .ssn(info[3])
-                .sal(info[4]).build();
+                .sal(Integer.parseInt(info[4])).build();
+    }
+
+    public LoginRequestDto readIDAndPW() {
+        MemberPrint.login();
+        String id = sc.nextLine();
+
+        MemberPrint.getLoginPW();
+        String pw = sc.nextLine();
+
+        return new LoginRequestDto(id, pw);
     }
 }
