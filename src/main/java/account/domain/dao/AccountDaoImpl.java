@@ -2,8 +2,8 @@ package account.domain.dao;
 
 
 import account.domain.dao.dto.AccountDto;
-import account.domain.dao.dto.request.IssueRequestDto;
 import account.domain.dao.dto.request.BankingRequestDto;
+import account.domain.dao.dto.request.IssueRequestDto;
 import global.util.DBUtil;
 
 import java.sql.*;
@@ -50,6 +50,34 @@ public class AccountDaoImpl implements AccountDao {
         } finally {
             DBUtil.close(con, ps, rs);
         }
+    }
+
+    @Override
+    public AccountDto findBySSN(String SSN) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        AccountDto response = null;
+        try {
+            con = DBUtil.getConnection();
+
+            ps = con.prepareStatement("SELECT account_id, owner_name, account_pw, balance FROM account WHERE owner_ssn = ?");
+            ps.setString(1, SSN);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                response = AccountDto.builder()
+                        .accountId(rs.getInt(1))
+                        .name(rs.getString(2))
+                        .encryptPW(rs.getString(3))
+                        .balance(rs.getInt(4))
+                        .build();
+            }
+        } catch (SQLException e) {
+            throw new IllegalArgumentException("예금주 주민번호를 통해 계좌 정보를 찾는 도중 에러가 발생했습니다.");
+        }
+        return response;
     }
 
     @Override

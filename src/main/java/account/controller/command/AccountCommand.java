@@ -26,4 +26,4 @@ public enum AccountCommand {
     public boolean isNotPrevious() {
         return this != PREVIOUS;
     }
-    }
+}

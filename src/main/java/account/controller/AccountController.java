@@ -6,10 +6,8 @@ import account.domain.service.AccountService;
 import account.view.AccountInputView;
 import account.view.AccountOutputView;
 import global.controller.Controller;
-import global.util.Retry;
 import global.view.GlobalOutputView;
 
-import java.sql.SQLException;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -45,14 +43,25 @@ public class AccountController implements Controller {
         }
     }
 
+    // 계좌 발급 API
+    /* @author : yuki
+     * @param : name(계좌 소유주명), ssn(주민등록번호)
+     * @response : AccountDto
+     * */
     public void issue() {
         try {
-            accountService.issue(execute(inputView::readNameAndSSN));
+            AccountDto response = accountService.issue(execute(inputView::readNameAndSSN));
+            outputView.successIssue(response);
         } catch (IllegalArgumentException e) {
             globalOutputView.printException(e.getMessage());
         }
     }
 
+    // 계좌 입금 API
+    /* @author : yuki
+     * @param : accountId(계좌번호), pw(계좌 비밀번호), amount(입금액)
+     * @response : AccountDto
+     * */
     public void deposit() {
         try {
             AccountDto response = accountService.deposit(execute(inputView::readBankingInfo));
@@ -62,6 +71,11 @@ public class AccountController implements Controller {
         }
     }
 
+    // 계좌 출금 API
+    /* @author : yuki
+     * @param : accountId(계좌번호), pw(계좌 비밀번호), amount(입금액)
+     * @response : AccountDto
+     * */
     public void withdraw() {
         try {
             AccountDto response = accountService.withDraw(execute(inputView::readBankingInfo));
