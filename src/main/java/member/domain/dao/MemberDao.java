@@ -1,7 +1,7 @@
 package member.domain.dao;
 
-import member.domain.dao.dto.MemberDto;
-import member.domain.dao.dto.response.LoginResponseDto;
+import member.domain.dto.MemberDto;
+import member.domain.dto.response.LoginResponseDto;
 
 public interface MemberDao {
     // Sign-Up

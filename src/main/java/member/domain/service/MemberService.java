@@ -2,9 +2,9 @@ package member.domain.service;
 
 import member.domain.dao.MemberDao;
 import member.domain.dao.MemberDaoImpl;
-import member.domain.dao.dto.MemberDto;
-import member.domain.dao.dto.request.LoginRequestDto;
-import member.domain.dao.dto.response.LoginResponseDto;
+import member.domain.dto.MemberDto;
+import member.domain.dto.request.LoginRequestDto;
+import member.domain.dto.response.LoginResponseDto;
 import member.util.Crypt;
 
 public class MemberService {

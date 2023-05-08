@@ -1,8 +1,8 @@
 package member.view;
 
 import member.controller.command.MemberCommand;
-import member.domain.dao.dto.MemberDto;
-import member.domain.dao.dto.request.LoginRequestDto;
+import member.domain.dto.MemberDto;
+import member.domain.dto.request.LoginRequestDto;
 import member.util.MemberPrint;
 
 import java.util.Scanner;

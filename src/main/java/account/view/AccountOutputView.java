@@ -1,6 +1,6 @@
 package account.view;
 
-import account.domain.dao.dto.AccountDto;
+import account.domain.dto.AccountDto;
 
 public class AccountOutputView {
     public static final String YELLOW = "\u001B[33m";

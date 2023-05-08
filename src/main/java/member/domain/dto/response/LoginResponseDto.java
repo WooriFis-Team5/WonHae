@@ -1,4 +1,4 @@
-package member.domain.dao.dto.response;
+package member.domain.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

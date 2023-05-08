@@ -1,8 +1,8 @@
 package member.domain.dao;
 
 import global.util.DBUtil;
-import member.domain.dao.dto.MemberDto;
-import member.domain.dao.dto.response.LoginResponseDto;
+import member.domain.dto.MemberDto;
+import member.domain.dto.response.LoginResponseDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

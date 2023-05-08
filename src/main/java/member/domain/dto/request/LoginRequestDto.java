@@ -1,4 +1,4 @@
-package member.domain.dao.dto.request;
+package member.domain.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

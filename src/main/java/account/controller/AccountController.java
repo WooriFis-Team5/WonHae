@@ -1,7 +1,7 @@
 package account.controller;
 
 import account.controller.command.AccountCommand;
-import account.domain.dao.dto.AccountDto;
+import account.domain.dto.AccountDto;
 import account.domain.service.AccountService;
 import account.view.AccountInputView;
 import account.view.AccountOutputView;

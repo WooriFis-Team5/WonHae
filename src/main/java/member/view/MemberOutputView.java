@@ -1,8 +1,5 @@
 package member.view;
 
-import member.domain.dao.dto.MemberDto;
-import member.domain.dao.dto.response.LoginResponseDto;
-
 public class MemberOutputView {
     public void completeSignUp() {
         System.out.println("\nSign-Up complete!!!");

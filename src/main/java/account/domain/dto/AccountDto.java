@@ -1,4 +1,4 @@
-package account.domain.dao.dto;
+package account.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

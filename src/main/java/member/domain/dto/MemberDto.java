@@ -1,4 +1,4 @@
-package member.domain.dao.dto;
+package member.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;

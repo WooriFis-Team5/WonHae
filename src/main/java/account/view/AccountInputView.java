@@ -1,8 +1,8 @@
 package account.view;
 
 import account.controller.command.AccountCommand;
-import account.domain.dao.dto.request.BankingRequestDto;
-import account.domain.dao.dto.request.IssueRequestDto;
+import account.domain.dto.request.BankingRequestDto;
+import account.domain.dto.request.IssueRequestDto;
 import account.util.AccountPrint;
 
 import java.util.Scanner;
