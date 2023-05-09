@@ -27,13 +27,13 @@ public class DBUtil {
 
     public static void close(Connection con, Statement stmt) {
         try {
-            if (con != null) {
-                con.close();
-                con = null;
-            }
             if (stmt != null) {
                 stmt.close();
                 stmt = null;
+            }
+            if (con != null) {
+                con.close();
+                con = null;
             }
         } catch (SQLException s) {
             s.printStackTrace();
