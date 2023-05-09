@@ -43,11 +43,6 @@ public class AccountController implements Controller {
         }
     }
 
-    // 계좌 발급 API
-    /* @author : yuki
-     * @param : name(계좌 소유주명), ssn(주민등록번호)
-     * @response : AccountDto
-     * */
     public void issue() {
         try {
             AccountDto response = accountService.issue(execute(inputView::readNameAndSSN));
@@ -57,11 +52,6 @@ public class AccountController implements Controller {
         }
     }
 
-    // 계좌 입금 API
-    /* @author : yuki
-     * @param : accountId(계좌번호), pw(계좌 비밀번호), amount(입금액)
-     * @response : AccountDto
-     * */
     public void deposit() {
         try {
             AccountDto response = accountService.deposit(execute(inputView::readBankingInfo));

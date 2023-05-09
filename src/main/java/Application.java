@@ -24,9 +24,9 @@ public class Application {
         mapper.put(LOGIN, new MemberController(memberService()));
         mapper.put(ACCOUNT, new AccountController(accountService()));
         mapper.put(LOAN, new LoanController(loanService()));
-
         return mapper;
     }
+
 
     private static MemberService memberService() {
         return new MemberService();

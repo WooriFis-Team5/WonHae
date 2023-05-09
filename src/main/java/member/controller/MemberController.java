@@ -1,6 +1,7 @@
 package member.controller;
 
 import global.controller.Controller;
+import global.view.GlobalOutputView;
 import member.controller.command.MemberCommand;
 import member.domain.service.MemberService;
 import member.view.MemberInputView;
@@ -16,6 +17,7 @@ public class MemberController implements Controller {
     private Map<MemberCommand, Runnable> service = new HashMap<>();
     private final MemberInputView memberInputView = new MemberInputView();
     private final MemberOutputView memberOutputView = new MemberOutputView();
+    private final GlobalOutputView globalOutputView = new GlobalOutputView();
     private final MemberService memberService;
 
     public MemberController(MemberService memberService) {
@@ -50,14 +52,18 @@ public class MemberController implements Controller {
 
     // 로그인 API
     /* @author : yuki
-    *  @param : id(아이디), pw(비밀번호)
-    *  @response : boolean
-    * */
+     *  @param : id(아이디), pw(비밀번호)
+     *  @response : boolean
+     * */
     public void login() {
-        if (!memberService.login(execute(memberInputView::readIDAndPW))) {
-               memberOutputView.failLogin();
+        try {
+            if (!memberService.login(execute(memberInputView::readIDAndPW))) {
+                throw new IllegalArgumentException("로그인에 실패하셨습니다.");
+            }
+            memberOutputView.completeLogin();
+        } catch (Exception e) {
+            globalOutputView.printException(e.getMessage());
         }
-        memberOutputView.completeLogin();
     }
 
     // 차후 예정
